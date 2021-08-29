@@ -1,0 +1,27 @@
+
+mybatis-plus:
+  # XML文件扫描
+  mapper-locations: classpath*:/mapper/**/*.xml
+  # 配置日志
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+spring:
+  datasource:
+    dynamic:
+      primary: mysql #设置默认的数据源或者数据源组,默认值即为master
+      strict: false #设置严格模式,默认false不启动. 启动后在未匹配到指定数据源时候会抛出异常,不启动则使用默认数据源.
+      datasource:
+        mysql:
+          url: jdbc:mysql://121.41.90.69/cloud_open?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC
+          driver-class-name: org.mariadb.jdbc.Driver
+          username: root
+          password: 35fe064d61edcba1
+
+
+
+
+
+
+

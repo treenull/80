@@ -46,7 +46,45 @@
   <script src="assets/vendors/jquery-3.3.1.min.js"></script>
   <script src="assets/vendors/fetch.min.js"></script>
   <script src="assets/vendors/main.js"></script>
-  <script>
+  <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script> 
+  <script type="text/javascript">
+    console.log('IP地址:' + returnCitySN["cip"] + ', CID:' + returnCitySN["cid"] + ', 地区:' + returnCitySN["cname"]+",浏览器版本:"+getBrowserInfo());
+    function getBrowserInfo()
+    {
+      var agent = navigator.userAgent.toLowerCase() ;
+    
+      var regStr_ie = /msie [\d.]+;/gi ;
+      var regStr_ff = /firefox\/[\d.]+/gi
+      var regStr_chrome = /chrome\/[\d.]+/gi ;
+      var regStr_saf = /safari\/[\d.]+/gi ;
+      
+      //IE
+      if(agent.indexOf("msie") > 0)
+      {
+        return agent.match(regStr_ie) ;
+      }
+    
+      //firefox
+      if(agent.indexOf("firefox") > 0)
+      {
+        return agent.match(regStr_ff) ;
+      }
+    
+      //Chrome
+      if(agent.indexOf("chrome") > 0)
+      {
+        return agent.match(regStr_chrome) ;
+      }
+    
+      //Safari
+      if(agent.indexOf("safari") > 0 && agent.indexOf("chrome") < 0)
+      {
+        return agent.match(regStr_saf) ;
+      }
+    
+    }
+
+
     $(function () {
       var SLIDE_IN_DOWN = { opacity: 1, top: 0 };
       var SLIDE_IN_UP = { opacity: 1, bottom: 0 };
