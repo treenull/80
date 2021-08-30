@@ -1,11 +1,12 @@
 server:
   port: 9282
 
-#mybatis-plus:
-  # XML文件扫描
-#  mapper-locations: classpath*:/mapper/**/*.xml
+mybatis-plus:
+#XML文件扫描
+  mapper-locations: classpath*:/mapper/cloudopen/*.xml
   # 配置日志
-#  configuration:
+  configuration:
+      map-underscore-to-camel-case: false # 数据库下划线自动转驼峰标示关闭
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 

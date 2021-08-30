@@ -1,8 +1,9 @@
 package com.wyj.cloudopen.entity;
 
-import java.time.LocalDateTime;
-import java.sql.Blob;
+
 import java.io.Serializable;
+import java.util.Date;
+
 
 /**
  * <p>
@@ -19,7 +20,7 @@ public class Yiyan implements Serializable {
     /**
      * 数据库添加时间
      */
-    private LocalDateTime addTime;
+    private Date addTime;
 
     /**
      * 访问ip地址-来源JS
@@ -64,13 +65,13 @@ public class Yiyan implements Serializable {
     /**
      * 一言-原始json
      */
-    private Blob ySourceJson;
+    private String ySourceJson;
 
-    public LocalDateTime getAddTime() {
+    public Date getAddTime() {
         return addTime;
     }
 
-    public void setAddTime(LocalDateTime addTime) {
+    public void setAddTime(Date addTime) {
         this.addTime = addTime;
     }
     public String getAccessIP() {
@@ -129,11 +130,11 @@ public class Yiyan implements Serializable {
     public void setyCreatedAt(String yCreatedAt) {
         this.yCreatedAt = yCreatedAt;
     }
-    public Blob getySourceJson() {
+    public String getySourceJson() {
         return ySourceJson;
     }
 
-    public void setySourceJson(Blob ySourceJson) {
+    public void setySourceJson(String ySourceJson) {
         this.ySourceJson = ySourceJson;
     }
 
