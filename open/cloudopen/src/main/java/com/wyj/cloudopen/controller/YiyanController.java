@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 @RequestMapping("/cloudopen/yiyan")
+@CrossOrigin
 public class YiyanController {
 
     @Autowired
