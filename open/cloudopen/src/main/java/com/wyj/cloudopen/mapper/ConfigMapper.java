@@ -1,6 +1,6 @@
 package com.wyj.cloudopen.mapper;
 
-import com.wyj.cloudopen.entity.Yiyan;
+import com.wyj.cloudopen.entity.Config;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author WYJ
  * @since 2021-08-30
  */
-public interface YiyanMapper extends BaseMapper<Yiyan> {
+public interface ConfigMapper extends BaseMapper<Config> {
 
 }

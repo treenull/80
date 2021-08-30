@@ -10,7 +10,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author WYJ
- * @since 2021-08-29
+ * @since 2021-08-30
  */
 public class Yiyan implements Serializable {
 
@@ -19,137 +19,137 @@ public class Yiyan implements Serializable {
     /**
      * 数据库添加时间
      */
-    private LocalDateTime add_time;
+    private LocalDateTime addTime;
 
     /**
      * 访问ip地址-来源JS
      */
-    private String access_ip;
+    private String accessIP;
 
     /**
      * 访问时间-来源JS
      */
-    private String interview_time;
+    private String interviewTime;
 
     /**
      * 一言
      */
-    private String y_hitokoto;
+    private String yHitokoto;
 
     /**
      * 一言-出处
      */
-    private String y_from;
+    private String yFrom;
 
     /**
      * 一言-作者
      */
-    private String y_from_who;
+    private String yFromWho;
 
     /**
      * 一言-分享者
      */
-    private String y_creator;
+    private String yCreator;
 
     /**
      * 一言-分享出处
      */
-    private String y_commit_from;
+    private String yCommitFrom;
 
     /**
      * 一言-分享时间
      */
-    private String y_created_at;
+    private String yCreatedAt;
 
     /**
      * 一言-原始json
      */
-    private Blob y_source_json;
+    private Blob ySourceJson;
 
-    public LocalDateTime getAdd_time() {
-        return add_time;
-    }
-
-    public void setAdd_time(LocalDateTime add_time) {
-        this.add_time = add_time;
-    }
-    public String getAccess_ip() {
-        return access_ip;
+    public LocalDateTime getAddTime() {
+        return addTime;
     }
 
-    public void setAccess_ip(String access_ip) {
-        this.access_ip = access_ip;
+    public void setAddTime(LocalDateTime addTime) {
+        this.addTime = addTime;
     }
-    public String getInterview_time() {
-        return interview_time;
-    }
-
-    public void setInterview_time(String interview_time) {
-        this.interview_time = interview_time;
-    }
-    public String gety_hitokoto() {
-        return y_hitokoto;
+    public String getAccessIP() {
+        return accessIP;
     }
 
-    public void sety_hitokoto(String y_hitokoto) {
-        this.y_hitokoto = y_hitokoto;
+    public void setAccessIP(String accessIP) {
+        this.accessIP = accessIP;
     }
-    public String gety_from() {
-        return y_from;
-    }
-
-    public void sety_from(String y_from) {
-        this.y_from = y_from;
-    }
-    public String gety_from_who() {
-        return y_from_who;
+    public String getInterviewTime() {
+        return interviewTime;
     }
 
-    public void sety_from_who(String y_from_who) {
-        this.y_from_who = y_from_who;
+    public void setInterviewTime(String interviewTime) {
+        this.interviewTime = interviewTime;
     }
-    public String gety_creator() {
-        return y_creator;
-    }
-
-    public void sety_creator(String y_creator) {
-        this.y_creator = y_creator;
-    }
-    public String gety_commit_from() {
-        return y_commit_from;
+    public String getyHitokoto() {
+        return yHitokoto;
     }
 
-    public void sety_commit_from(String y_commit_from) {
-        this.y_commit_from = y_commit_from;
+    public void setyHitokoto(String yHitokoto) {
+        this.yHitokoto = yHitokoto;
     }
-    public String gety_created_at() {
-        return y_created_at;
-    }
-
-    public void sety_created_at(String y_created_at) {
-        this.y_created_at = y_created_at;
-    }
-    public Blob gety_source_json() {
-        return y_source_json;
+    public String getyFrom() {
+        return yFrom;
     }
 
-    public void sety_source_json(Blob y_source_json) {
-        this.y_source_json = y_source_json;
+    public void setyFrom(String yFrom) {
+        this.yFrom = yFrom;
+    }
+    public String getyFromWho() {
+        return yFromWho;
+    }
+
+    public void setyFromWho(String yFromWho) {
+        this.yFromWho = yFromWho;
+    }
+    public String getyCreator() {
+        return yCreator;
+    }
+
+    public void setyCreator(String yCreator) {
+        this.yCreator = yCreator;
+    }
+    public String getyCommitFrom() {
+        return yCommitFrom;
+    }
+
+    public void setyCommitFrom(String yCommitFrom) {
+        this.yCommitFrom = yCommitFrom;
+    }
+    public String getyCreatedAt() {
+        return yCreatedAt;
+    }
+
+    public void setyCreatedAt(String yCreatedAt) {
+        this.yCreatedAt = yCreatedAt;
+    }
+    public Blob getySourceJson() {
+        return ySourceJson;
+    }
+
+    public void setySourceJson(Blob ySourceJson) {
+        this.ySourceJson = ySourceJson;
     }
 
     @Override
     public String toString() {
         return "Yiyan{" +
-            "add_time=" + add_time +
-            ", access_ip=" + access_ip +
-            ", interview_time=" + interview_time +
-            ", y_hitokoto=" + y_hitokoto +
-            ", y_from=" + y_from +
-            ", y_from_who=" + y_from_who +
-            ", y_creator=" + y_creator +
-            ", y_commit_from=" + y_commit_from +
-            ", y_created_at=" + y_created_at +
-            ", y_source_json=" + y_source_json +
+            "addTime=" + addTime +
+            ", accessIP=" + accessIP +
+            ", interviewTime=" + interviewTime +
+            ", yHitokoto=" + yHitokoto +
+            ", yFrom=" + yFrom +
+            ", yFromWho=" + yFromWho +
+            ", yCreator=" + yCreator +
+            ", yCommitFrom=" + yCommitFrom +
+            ", yCreatedAt=" + yCreatedAt +
+            ", ySourceJson=" + ySourceJson +
         "}";
     }
 }

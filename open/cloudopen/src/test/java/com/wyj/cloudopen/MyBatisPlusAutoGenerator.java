@@ -64,7 +64,7 @@ public class MyBatisPlusAutoGenerator {
             dsc.setUrl("jdbc:mysql://121.41.90.69/cloud_open?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC");
             dsc.setDriverName("org.mariadb.jdbc.Driver");
             dsc.setUsername("root");
-            dsc.setPassword("35fe064d61edcba1");
+            dsc.setPassword("kYy5HWjR26mYaEeC");
 
             /*
             MySQL  ssf

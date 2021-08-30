@@ -1,10 +1,12 @@
+server:
+  port: 9282
 
-mybatis-plus:
+#mybatis-plus:
   # XML文件扫描
-  mapper-locations: classpath*:/mapper/**/*.xml
+#  mapper-locations: classpath*:/mapper/**/*.xml
   # 配置日志
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 
 spring:
@@ -17,11 +19,11 @@ spring:
           url: jdbc:mysql://121.41.90.69/cloud_open?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC
           driver-class-name: org.mariadb.jdbc.Driver
           username: root
-          password: 35fe064d61edcba1
+          password: kYy5HWjR26mYaEeC
 
-
-
-
-
-
-
+  #热部署
+  devtools:
+    restart:
+      #需要实时更新的目录
+      additional-paths: /resources/**,/java/com/wyj/cloudopen/controller/**
+      enabled: true
