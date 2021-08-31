@@ -21,6 +21,7 @@ function dataRecord(data){
               'Content-Type': 'application/json'
             })
           }).then(res => res.json())
-          .catch(error => console.error('Error:', error))
-          .then(response => console.log('Success:', response));
+          .catch(function (err){
+              console.error(err)
+          });
 }
