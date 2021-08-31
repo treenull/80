@@ -5,6 +5,7 @@ import com.wyj.cloudopen.entity.Yiyan;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * <p>
@@ -22,6 +23,8 @@ public interface IYiyanService extends IService<Yiyan> {
      * @param request  http请求数据
      * @return
      */
-    public int dataRecord(JSONObject jsonObject, HttpServletRequest request);
+    int dataRecord(JSONObject jsonObject, HttpServletRequest request);
+
+    JSONObject list(JSONObject jsonObject);
 
 }

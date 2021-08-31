@@ -32,17 +32,24 @@ public class YiyanController {
     @ResponseBody
     @GetMapping("/checkHealth")
     public JSONObject checkHealth(HttpServletResponse response){
-        response.setHeader("Access-Control-Allow-Origin","*");
+
         return CommonUtil.successJson("200");
     }
 
     @ResponseBody
     @PostMapping("/dataRecord")
-    public void dataRecord(@RequestBody JSONObject jsonObject, HttpServletResponse response, HttpServletRequest request){
-
-        response.setHeader("Access-Control-Allow-Origin","*");
+    public JSONObject dataRecord(@RequestBody JSONObject jsonObject, HttpServletResponse response, HttpServletRequest request){
 
         iYiyanService.dataRecord(jsonObject,request);
+
+        return CommonUtil.successJson("200");
+    }
+
+    @ResponseBody
+    @GetMapping("/list")
+    public JSONObject recordList(HttpServletRequest request){
+
+        return iYiyanService.list(CommonUtil.request2Json(request));
 
     }
 

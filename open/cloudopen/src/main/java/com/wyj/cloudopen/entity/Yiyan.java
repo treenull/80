@@ -50,7 +50,7 @@ public class Yiyan implements Serializable {
     /**
      * 一言-分享者
      */
-    private String yCreator;
+    private String ySharer;
 
     /**
      * 一言-分享出处
@@ -109,12 +109,12 @@ public class Yiyan implements Serializable {
     public void setyFromWho(String yFromWho) {
         this.yFromWho = yFromWho;
     }
-    public String getyCreator() {
-        return yCreator;
+    public String getySharer() {
+        return ySharer;
     }
 
-    public void setyCreator(String yCreator) {
-        this.yCreator = yCreator;
+    public void setySharer(String yCreator) {
+        this.ySharer = yCreator;
     }
     public String getyCommitFrom() {
         return yCommitFrom;
@@ -147,7 +147,7 @@ public class Yiyan implements Serializable {
             ", yHitokoto=" + yHitokoto +
             ", yFrom=" + yFrom +
             ", yFromWho=" + yFromWho +
-            ", yCreator=" + yCreator +
+            ", yCreator=" + ySharer +
             ", yCommitFrom=" + yCommitFrom +
             ", yCreatedAt=" + yCreatedAt +
             ", ySourceJson=" + ySourceJson +
