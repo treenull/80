@@ -12,7 +12,7 @@ $(document).ready(function () {
 });
 
 function dataRecord(data){
-    const url = 'http://121.41.90.69:9282/cloudopen/yiyan/dataRecord';
+    const url = 'https://open.treenull.cn/cloudopen/yiyan/dataRecord';
         fetch(url, {
             method: 'POST',
             mode: 'cors',
