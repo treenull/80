@@ -74,7 +74,12 @@ public class IpAndAddrUtil {
         Browser browser = userAgent.getBrowser();
         //获取浏览器版本号
         Version version = browser.getVersion(header);
-        return version.getVersion();
+        if(version==null){
+            return "Unknown";
+        }else {
+            return version.getVersion();
+        }
+
     }
 
     /**
