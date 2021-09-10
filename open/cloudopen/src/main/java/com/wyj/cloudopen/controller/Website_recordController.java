@@ -30,9 +30,9 @@ public class Website_recordController {
 
     @ResponseBody
     @GetMapping("/record")
-    public JSONObject dataRecord(@RequestBody JSONObject jsonObject, HttpServletResponse response, HttpServletRequest request){
+    public JSONObject dataRecord(HttpServletResponse response, HttpServletRequest request){
 
-        iWebsiteRecordService.record(jsonObject,request);
+        iWebsiteRecordService.record(request);
 
         return CommonUtil.successJson("200");
     }

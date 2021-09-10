@@ -27,13 +27,15 @@ public class Website_recordServiceImpl extends ServiceImpl<Website_recordMapper,
     private Website_recordMapper websiteRecordMapper;
 
     @Override
-    public int record(JSONObject jsonObject, HttpServletRequest request) {
+    public int record(HttpServletRequest request) {
         Website_record website_record = new Website_record();
+        String serName = IpAndAddrUtil.getSerName(request);
         String ip = IpAndAddrUtil.getIp(request);
         String bName = IpAndAddrUtil.getBrowserName(request);
         String bVersion = IpAndAddrUtil.getBrowserVersion(request);
         String osName = IpAndAddrUtil.getOsName(request);
 
+        website_record.setAccessWeb(serName);
         website_record.setAccessIP(ip);
         website_record.setAccessBrowser(bName);
         website_record.setAccessBrowserVersion(bVersion);

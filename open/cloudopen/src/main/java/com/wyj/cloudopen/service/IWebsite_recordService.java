@@ -18,10 +18,9 @@ public interface IWebsite_recordService extends IService<Website_record> {
 
     /**
      * 网站访问记录
-     * @param jsonObject
      * @param request
      * @return
      */
-    int record(JSONObject jsonObject, HttpServletRequest request);
+    int record(HttpServletRequest request);
 
 }

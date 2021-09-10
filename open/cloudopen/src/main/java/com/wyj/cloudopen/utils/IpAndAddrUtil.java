@@ -91,4 +91,11 @@ public class IpAndAddrUtil {
         OperatingSystem operatingSystem = userAgent.getOperatingSystem();
         return operatingSystem.getName();
     }
+
+    /**
+     * 获取发起请求的操作系统名称
+     */
+    public static String getSerName(HttpServletRequest request) {
+        return request.getServerName();
+    }
 }
