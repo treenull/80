@@ -29,13 +29,13 @@ public class Website_recordServiceImpl extends ServiceImpl<Website_recordMapper,
     @Override
     public int record(HttpServletRequest request) {
         Website_record website_record = new Website_record();
-        String serName = IpAndAddrUtil.getSerName(request);
+        String webName = request.getParameter("web");
         String ip = IpAndAddrUtil.getIp(request);
         String bName = IpAndAddrUtil.getBrowserName(request);
         String bVersion = IpAndAddrUtil.getBrowserVersion(request);
         String osName = IpAndAddrUtil.getOsName(request);
 
-        website_record.setAccessWeb(serName);
+        website_record.setAccessWeb(webName);
         website_record.setAccessIP(ip);
         website_record.setAccessBrowser(bName);
         website_record.setAccessBrowserVersion(bVersion);
