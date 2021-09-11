@@ -125,8 +125,8 @@
     });
   </script>
   <script type="text/javascript">
-      var url = "https://open.treenull.cn/cloudopen/record"+"?web="+document.location.host;
-      fetch(url);
+    var url = "https://open.treenull.cn/cloudopen/record"+"?hostname="+document.location.host+"&timestamp="+new Date().getTime();
+    fetch(url);
   </script>
 </body>
 </html>

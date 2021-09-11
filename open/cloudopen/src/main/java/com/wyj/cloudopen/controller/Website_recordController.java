@@ -28,6 +28,7 @@ public class Website_recordController {
     @Autowired
     private IWebsite_recordService iWebsiteRecordService;
 
+
     @ResponseBody
     @GetMapping("/record")
     public JSONObject dataRecord(HttpServletResponse response, HttpServletRequest request){
@@ -36,5 +37,15 @@ public class Website_recordController {
 
         return CommonUtil.successJson("200");
     }
+
+    @ResponseBody
+    @PostMapping("/detailedRecord")
+    public JSONObject detailedRecord(@RequestBody JSONObject jsonObject, HttpServletResponse response, HttpServletRequest request){
+
+        iWebsiteRecordService.detailedRecord(jsonObject,request);
+
+        return CommonUtil.successJson("200");
+    }
+
 
 }

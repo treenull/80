@@ -1,8 +1,8 @@
 package com.wyj.cloudopen.service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.wyj.cloudopen.entity.Website_record;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.wyj.cloudopen.entity.Website_record;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,5 +22,13 @@ public interface IWebsite_recordService extends IService<Website_record> {
      * @return
      */
     int record(HttpServletRequest request);
+
+    /**
+     * 网站访问详细记录
+     * @param jsonObject
+     * @param request
+     * @return
+     */
+    int detailedRecord(JSONObject jsonObject,HttpServletRequest request);
 
 }

@@ -9,7 +9,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author WYJ
- * @since 2021-09-09
+ * @since 2021-09-11
  */
 public class Website_record implements Serializable {
 
@@ -44,6 +44,11 @@ public class Website_record implements Serializable {
      * 访问系统名称
      */
     private String accessOsName;
+
+    /**
+     * 访问归属地地址
+     */
+    private String accessAddr;
 
     /**
      * 访问时间-来源JS
@@ -92,6 +97,13 @@ public class Website_record implements Serializable {
     public void setAccessOsName(String accessOsName) {
         this.accessOsName = accessOsName;
     }
+    public String getAccessAddr() {
+        return accessAddr;
+    }
+
+    public void setAccessAddr(String accessAddr) {
+        this.accessAddr = accessAddr;
+    }
     public String getInterviewTime() {
         return interviewTime;
     }
@@ -109,6 +121,7 @@ public class Website_record implements Serializable {
                 ", accessBrowser=" + accessBrowser +
                 ", accessBrowserVersion=" + accessBrowserVersion +
                 ", accessOsName=" + accessOsName +
+                ", accessAddr=" + accessAddr +
                 ", interviewTime=" + interviewTime +
                 "}";
     }

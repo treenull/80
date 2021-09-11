@@ -93,7 +93,7 @@ public class IpAndAddrUtil {
     }
 
     /**
-     * 获取发起请求的操作系统名称
+     * 获取域名
      */
     public static String getSerName(HttpServletRequest request) {
         return request.getServerName();
