@@ -51,9 +51,19 @@ public class Website_record implements Serializable {
     private String accessAddr;
 
     /**
+     * 访问来源DNS解析
+     */
+    private String accessRdns;
+
+    /**
      * 访问时间-来源JS
      */
     private String interviewTime;
+
+    /**
+     * 状态 1 已更新  0 未更新
+     */
+    private int status;
 
     public LocalDateTime getAddTime() {
         return addTime;
@@ -104,6 +114,9 @@ public class Website_record implements Serializable {
     public void setAccessAddr(String accessAddr) {
         this.accessAddr = accessAddr;
     }
+    public String getAccessRdns() { return accessRdns; }
+
+    public void setAccessRdns(String accessRdns) { this.accessRdns = accessRdns; }
     public String getInterviewTime() {
         return interviewTime;
     }
@@ -112,17 +125,27 @@ public class Website_record implements Serializable {
         this.interviewTime = interviewTime;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "Website_record{" +
                 "addTime=" + addTime +
-                ", accessWeb=" + accessWeb +
-                ", accessIP=" + accessIP +
-                ", accessBrowser=" + accessBrowser +
-                ", accessBrowserVersion=" + accessBrowserVersion +
-                ", accessOsName=" + accessOsName +
-                ", accessAddr=" + accessAddr +
-                ", interviewTime=" + interviewTime +
-                "}";
+                ", accessWeb='" + accessWeb + '\'' +
+                ", accessIP='" + accessIP + '\'' +
+                ", accessBrowser='" + accessBrowser + '\'' +
+                ", accessBrowserVersion='" + accessBrowserVersion + '\'' +
+                ", accessOsName='" + accessOsName + '\'' +
+                ", accessAddr='" + accessAddr + '\'' +
+                ", accessRdns='" + accessRdns + '\'' +
+                ", interviewTime='" + interviewTime + '\'' +
+                ", status=" + status +
+                '}';
     }
 }
