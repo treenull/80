@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wyj.cloudopen.entity.Website_record;
 import com.wyj.cloudopen.mapper.Website_recordMapper;
 import com.wyj.cloudopen.service.IWebsite_recordService;
+import com.wyj.cloudopen.utils.DateUtils;
 import com.wyj.cloudopen.utils.IpAndAddrUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,11 +56,10 @@ public class Website_recordServiceImpl extends ServiceImpl<Website_recordMapper,
         String bVersion = IpAndAddrUtil.getBrowserVersion(request);
         String osName = IpAndAddrUtil.getOsName(request);
 
-
         websiteRecord.setAccessWeb(jsonObject.getString("hostname"));
         websiteRecord.setInterviewTime(jsonObject.getString("timestamp"));
 
-
+        websiteRecord.setAddTime(DateUtils.getDateTime());
         websiteRecord.setAccessIP(ip);
         websiteRecord.setAccessBrowser(bName);
         websiteRecord.setAccessBrowserVersion(bVersion);
@@ -69,5 +69,6 @@ public class Website_recordServiceImpl extends ServiceImpl<Website_recordMapper,
 
         return websiteRecordMapper.insert(websiteRecord);
     }
+
 
 }

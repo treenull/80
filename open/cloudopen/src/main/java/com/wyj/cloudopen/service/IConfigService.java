@@ -13,4 +13,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IConfigService extends IService<Config> {
 
+    /**
+     * 根据Key获取Value
+     * @param configKey
+     * @return
+     */
+    public String getConfigValue(String configKey);
+
 }

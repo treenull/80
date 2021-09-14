@@ -31,4 +31,5 @@ public interface IWebsite_recordService extends IService<Website_record> {
      */
     int detailedRecord(JSONObject jsonObject,HttpServletRequest request);
 
+
 }

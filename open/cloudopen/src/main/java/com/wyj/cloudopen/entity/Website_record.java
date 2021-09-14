@@ -16,9 +16,14 @@ public class Website_record implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
+     * 自增ID主键
+     */
+    private int id;
+
+    /**
      * 数据库添加时间
      */
-    private LocalDateTime addTime;
+    private String addTime;
 
     /**
      * 访问web页面
@@ -51,6 +56,11 @@ public class Website_record implements Serializable {
     private String accessAddr;
 
     /**
+     * 访问来源网络运营商
+     */
+    private String accessOperator;
+
+    /**
      * 访问来源DNS解析
      */
     private String accessRdns;
@@ -61,15 +71,28 @@ public class Website_record implements Serializable {
     private String interviewTime;
 
     /**
-     * 状态 1 已更新  0 未更新
+     * 数据更新时间
+     */
+    private LocalDateTime updateTime;
+
+    /**
+     * 状态 0001 已更新  0000 未更新
      */
     private int status;
 
-    public LocalDateTime getAddTime() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getAddTime() {
         return addTime;
     }
 
-    public void setAddTime(LocalDateTime addTime) {
+    public void setAddTime(String addTime) {
         this.addTime = addTime;
     }
     public String getAccessWeb() {
@@ -114,6 +137,15 @@ public class Website_record implements Serializable {
     public void setAccessAddr(String accessAddr) {
         this.accessAddr = accessAddr;
     }
+
+    public String getAccessOperator() {
+        return accessOperator;
+    }
+
+    public void setAccessOperator(String accessOperator) {
+        this.accessOperator = accessOperator;
+    }
+
     public String getAccessRdns() { return accessRdns; }
 
     public void setAccessRdns(String accessRdns) { this.accessRdns = accessRdns; }
@@ -123,6 +155,14 @@ public class Website_record implements Serializable {
 
     public void setInterviewTime(String interviewTime) {
         this.interviewTime = interviewTime;
+    }
+
+    public LocalDateTime getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(LocalDateTime updateTime) {
+        this.updateTime = updateTime;
     }
 
     public int getStatus() {
@@ -136,15 +176,18 @@ public class Website_record implements Serializable {
     @Override
     public String toString() {
         return "Website_record{" +
-                "addTime=" + addTime +
+                "id=" + id +
+                ", addTime='" + addTime + '\'' +
                 ", accessWeb='" + accessWeb + '\'' +
                 ", accessIP='" + accessIP + '\'' +
                 ", accessBrowser='" + accessBrowser + '\'' +
                 ", accessBrowserVersion='" + accessBrowserVersion + '\'' +
                 ", accessOsName='" + accessOsName + '\'' +
                 ", accessAddr='" + accessAddr + '\'' +
+                ", accessOperator='" + accessOperator + '\'' +
                 ", accessRdns='" + accessRdns + '\'' +
                 ", interviewTime='" + interviewTime + '\'' +
+                ", updateTime=" + updateTime +
                 ", status=" + status +
                 '}';
     }
