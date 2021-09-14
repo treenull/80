@@ -4,7 +4,6 @@ package com.wyj.cloudopen.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.wyj.cloudopen.entity.Config;
 import com.wyj.cloudopen.entity.Website_record;
 import com.wyj.cloudopen.service.IConfigService;
 import com.wyj.cloudopen.service.IWebsite_recordService;
@@ -13,10 +12,8 @@ import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.web.bind.annotation.*;
-
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -61,7 +58,7 @@ public class Website_recordController {
     }
 
     //每隔30分钟执行一次
-    @Scheduled(cron="0 30 * * * ?")
+    //@Scheduled(cron="0 30 * * * ?")
     @ResponseBody
     @GetMapping("/pythonIp")
     public JSONObject pythonIp() throws IOException {
