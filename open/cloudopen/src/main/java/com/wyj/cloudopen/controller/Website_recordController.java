@@ -60,8 +60,8 @@ public class Website_recordController {
         return CommonUtil.successJson("200");
     }
 
-    //每天晚上凌晨1点执行
-    @Scheduled(cron="0 0 1 * * ?")
+    //每隔30分钟执行一次
+    @Scheduled(cron="0 30 * * * ?")
     @ResponseBody
     @GetMapping("/pythonIp")
     public JSONObject pythonIp() throws IOException {
@@ -69,7 +69,7 @@ public class Website_recordController {
         //数据库获取所有未更新的ip数据
         QueryWrapper<Website_record> recordQueryWrapper = new QueryWrapper<>();
         // "SELECT id,accessIP FROM website_record WHERE status=0000 LIMIT 1"
-        recordQueryWrapper.select("id","accessIP").eq("status",00).last("limit 50");
+        recordQueryWrapper.select("id","accessIP").eq("status",00).last("limit 10");
         List<Website_record> websiteRecords =  iWebsiteRecordService.list(recordQueryWrapper);
 
         //数据库获取配置的爬虫爬取链接
