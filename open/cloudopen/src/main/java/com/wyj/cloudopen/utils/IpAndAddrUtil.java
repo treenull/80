@@ -1,13 +1,5 @@
 package com.wyj.cloudopen.utils;
 
-/*
- * @author WYJ
- * @data 2021/8/30 22:10
- * 概述：
- *       XXXXXX
- *
- */
-
 import eu.bitwalker.useragentutils.Browser;
 import eu.bitwalker.useragentutils.OperatingSystem;
 import eu.bitwalker.useragentutils.UserAgent;
@@ -18,6 +10,8 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
+ *  @author WYJ
+ *  @data 2021/4/22 15:32
  * 获取请求IP地址、浏览器相关信息
  */
 public class IpAndAddrUtil {

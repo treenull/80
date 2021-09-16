@@ -1,11 +1,4 @@
 package com.wyj.cloudopen.utils;
-/*
- * @author WYJ
- * @data 2021/4/22 15:32
- * 概述：
- *       时间获取工具类
- *
- */
 
 import org.apache.commons.lang3.time.DateFormatUtils;
 
@@ -15,6 +8,13 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * @author WYJ
+ * @data 2021/4/22 15:32
+ * 概述：
+ *       时间获取工具类
+ *
+ */
 public class DateUtils {
 
     /**

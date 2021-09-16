@@ -29,8 +29,8 @@ public class YiyanController {
     @Autowired
     private IYiyanService iYiyanService;
 
-    @ResponseBody
-    @GetMapping("/checkHealth")
+    //@ResponseBody
+    //@GetMapping("/checkHealth")
     public JSONObject checkHealth(HttpServletResponse response){
 
         return CommonUtil.successJson("200");
@@ -45,8 +45,8 @@ public class YiyanController {
         return CommonUtil.successJson("200");
     }
 
-    @ResponseBody
-    @GetMapping("/list")
+    //@ResponseBody
+    //@GetMapping("/list")
     public JSONObject recordList(HttpServletRequest request){
 
         return iYiyanService.list(CommonUtil.request2Json(request));

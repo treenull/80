@@ -3,13 +3,10 @@ package com.wyj.cloudopen;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 
 @SpringBootTest
 class CloudopenApplicationTests {

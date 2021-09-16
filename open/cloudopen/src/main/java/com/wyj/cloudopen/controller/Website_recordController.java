@@ -40,6 +40,13 @@ public class Website_recordController {
 
 
     @ResponseBody
+    @GetMapping("/checkHealth")
+    public JSONObject checkHealth(HttpServletResponse response){
+
+        return CommonUtil.successJson("200");
+    }
+
+    @ResponseBody
     @GetMapping("/record")
     public JSONObject dataRecord(HttpServletResponse response, HttpServletRequest request){
 
