@@ -27,9 +27,14 @@ public class DateUtils {
     public static final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
     /**
-     * 显示年月日时分秒，例如 2021-04-22 09:51:53.
+     * 显示年月日时分秒，例如 20210422095153
      */
     public static final String DATETIME_FORMAT_TWO = "yyyyMMddHHmmss";
+
+    /**
+     * 显示年月日时分秒，例如 2021-04-22 09:51:53 36
+     */
+    public static final String DATETIME_FORMAT_THREE = "yyyy-MM-dd HH:mm:ss.ss";
 
     /**
      * 仅显示时分秒，例如 09:51:53.
@@ -88,7 +93,7 @@ public class DateUtils {
      * @since 1.0
      */
     public static String getDate() {
-        return getDate(com.wyj.cloudopen.utils.DateUtils.DATE_FORMAT);
+        return getDate(DateUtils.DATE_FORMAT);
     }
 
     /**
@@ -97,7 +102,7 @@ public class DateUtils {
      * @since 1.0
      */
     public static String getTime() {
-        return formatDate(new Date(), com.wyj.cloudopen.utils.DateUtils.TIME_FORMAT);
+        return formatDate(new Date(), DateUtils.TIME_FORMAT);
     }
 
     /**
@@ -106,10 +111,8 @@ public class DateUtils {
      * @since 1.0
      */
     public static String getDateTime() {
-        return formatDate(new Date(), com.wyj.cloudopen.utils.DateUtils.DATETIME_FORMAT);
+        return formatDate(new Date(), DateUtils.DATETIME_FORMAT);
     }
-
-
 
     /**
      * 得到当前日期和时间字符串.
@@ -117,7 +120,16 @@ public class DateUtils {
      * @since 1.0
      */
     public static String getDateTimeTwo() {
-        return formatDate(new Date(), com.wyj.cloudopen.utils.DateUtils.DATETIME_FORMAT_TWO);
+        return formatDate(new Date(), DateUtils.DATETIME_FORMAT_TWO);
+    }
+
+    /**
+     * 得到当前日期和时间字符串.
+     * @return String 日期和时间字符串，例如 2021-04-22 09:51:53.32
+     * @since 1.0
+     */
+    public static String getDateTimeThree() {
+        return formatDate(new Date(), DateUtils.DATETIME_FORMAT_THREE);
     }
 
     /**
@@ -154,7 +166,7 @@ public class DateUtils {
         if (pattern != null && pattern.length > 0) {
             formatDate = DateFormatUtils.format(date, pattern[0].toString());
         } else {
-            formatDate = DateFormatUtils.format(date, com.wyj.cloudopen.utils.DateUtils.DATE_FORMAT);
+            formatDate = DateFormatUtils.format(date, DateUtils.DATE_FORMAT);
         }
         return formatDate;
     }
@@ -222,12 +234,12 @@ public class DateUtils {
      */
     public static long pastDays(Date date) {
         // 将指定日期转换为yyyy-MM-dd格式
-        date = com.wyj.cloudopen.utils.DateUtils.parseDate(com.wyj.cloudopen.utils.DateUtils.formatDate(date, com.wyj.cloudopen.utils.DateUtils.DATE_FORMAT));
+        date = DateUtils.parseDate(DateUtils.formatDate(date, DateUtils.DATE_FORMAT));
         // 当前日期转换为yyyy-MM-dd格式
-        Date currentDate = com.wyj.cloudopen.utils.DateUtils.parseDate(com.wyj.cloudopen.utils.DateUtils.formatDate(new Date(), com.wyj.cloudopen.utils.DateUtils.DATE_FORMAT));
+        Date currentDate = DateUtils.parseDate(DateUtils.formatDate(new Date(), DateUtils.DATE_FORMAT));
         long t=0;
         if(date!=null&&currentDate!=null){
-            t = (currentDate.getTime() - date.getTime()) / com.wyj.cloudopen.utils.DateUtils.MILLISECONDS_PER_DAY;
+            t = (currentDate.getTime() - date.getTime()) / DateUtils.MILLISECONDS_PER_DAY;
         }
         return t;
     }
@@ -293,13 +305,13 @@ public class DateUtils {
      */
     public static long getDaysBetween(Date start, Date end) {
         // 将指定日期转换为yyyy-MM-dd格式
-        start = com.wyj.cloudopen.utils.DateUtils.parseDate(com.wyj.cloudopen.utils.DateUtils.formatDate(start, com.wyj.cloudopen.utils.DateUtils.DATE_FORMAT));
+        start = DateUtils.parseDate(DateUtils.formatDate(start, DateUtils.DATE_FORMAT));
         // 当前日期转换为yyyy-MM-dd格式
-        end = com.wyj.cloudopen.utils.DateUtils.parseDate(com.wyj.cloudopen.utils.DateUtils.formatDate(end, com.wyj.cloudopen.utils.DateUtils.DATE_FORMAT));
+        end = DateUtils.parseDate(DateUtils.formatDate(end, DateUtils.DATE_FORMAT));
 
         long diff=0;
         if(start!=null&&end!=null) {
-            diff = (end.getTime() - start.getTime()) / com.wyj.cloudopen.utils.DateUtils.MILLISECONDS_PER_DAY;
+            diff = (end.getTime() - start.getTime()) / DateUtils.MILLISECONDS_PER_DAY;
         }
         return diff;
     }
@@ -312,7 +324,7 @@ public class DateUtils {
      * @since 1.0
      */
     public static long getWeeksBetween(Date start, Date end) {
-        return getDaysBetween(start, end) / com.wyj.cloudopen.utils.DateUtils.DAYS_PER_WEEK;
+        return getDaysBetween(start, end) / DateUtils.DAYS_PER_WEEK;
     }
 
     /**
@@ -330,7 +342,7 @@ public class DateUtils {
         c.setTime(specifiedDate);
         int day = c.get(Calendar.DATE);
         c.set(Calendar.DATE, day + num);
-        String dayAfter = formatDate(c.getTime(), com.wyj.cloudopen.utils.DateUtils.DATE_FORMAT);
+        String dayAfter = formatDate(c.getTime(), DateUtils.DATE_FORMAT);
         return dayAfter;
     }
 
@@ -350,7 +362,7 @@ public class DateUtils {
         }
         Long r = date1.getTime() - date2.getTime();
         DecimalFormat df = new DecimalFormat("#.0");
-        double result = r * 1.0 / com.wyj.cloudopen.utils.DateUtils.MILLISECONDS_PER_HOUR;
+        double result = r * 1.0 / DateUtils.MILLISECONDS_PER_HOUR;
         return df.format(result);
     }
 
@@ -397,7 +409,7 @@ public class DateUtils {
         } else if (seconds < SECONDS_PER_YEAR) {
             buffer.append(seconds / SECONDS_PER_MONTH).append("月前");
         } else {
-            buffer.append(seconds / com.wyj.cloudopen.utils.DateUtils.SECONDS_PER_YEAR).append("年前");
+            buffer.append(seconds / DateUtils.SECONDS_PER_YEAR).append("年前");
         }
         return buffer.toString();
     }
@@ -443,8 +455,8 @@ public class DateUtils {
     public static int getMonthsBetween(String startDate, String endDate) {
         Calendar c1 = Calendar.getInstance();
         Calendar c2 = Calendar.getInstance();
-        c1.setTime(com.wyj.cloudopen.utils.DateUtils.parseDate(startDate));
-        c2.setTime(com.wyj.cloudopen.utils.DateUtils.parseDate(endDate));
+        c1.setTime(DateUtils.parseDate(startDate));
+        c2.setTime(DateUtils.parseDate(endDate));
         int year = c2.get(Calendar.YEAR) - c1.get(Calendar.YEAR);
         int month = c2.get(Calendar.MONTH) - c1.get(Calendar.MONTH);
         return Math.abs(year * 12 + month);

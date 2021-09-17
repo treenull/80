@@ -37,6 +37,7 @@ public class Website_recordServiceImpl extends ServiceImpl<Website_recordMapper,
 
         String hostname = request.getParameter("hostname");
         String timestamp = request.getParameter("timestamp");
+        website_record.setAddTime(DateUtils.getDateTimeThree());
         website_record.setAccessWeb(hostname);
         website_record.setInterviewTime(timestamp);
         website_record.setAccessIP(ip);
