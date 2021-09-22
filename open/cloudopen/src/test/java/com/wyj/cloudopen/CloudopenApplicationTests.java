@@ -1,5 +1,6 @@
 package com.wyj.cloudopen;
 
+import com.wyj.cloudopen.utils.HttpClientUtil;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -40,8 +41,34 @@ class CloudopenApplicationTests {
 
 		System.out.println(s);
 
+	}
 
+	/**
+	 * 百度API逆向解码，获取经纬度
+	 */
+	@Test
+	public void test(){
+		String key = "ylitFOZXvf6rY5nCPm73DVFKOKo9XMFZ";
+		String address = "泛微软件大厦";
+		String originDouble = HttpClientUtil.doGet(
+				"http://api.map.baidu.com/geocoder?output=json&key="+key+"&address="+address);
+		com.alibaba.fastjson.JSONObject jsonObjectOri = com.alibaba.fastjson.JSONObject.parseObject(originDouble);
+		String status = jsonObjectOri.getString("status");
+		if (status == "OK" || "OK".equals(status)) {// 解析的地址不为空时 进行值的获取
+			String oriLng = jsonObjectOri.getJSONObject("result").getJSONObject("location").getString("lng");// 经度值
+			String oriLat = jsonObjectOri.getJSONObject("result").getJSONObject("location").getString("lat");// 纬度值
+			String location = oriLat + "," + oriLng;
+			String result = HttpClientUtil.doGet(
+					"http://api.map.baidu.com/geocoder?key=ylitFOZXvf6rY5nCPm73DVFKOKo9XMFZ&output=json&coordtype=wgs84ll&location="
+							+ location);
+			com.alibaba.fastjson.JSONObject jsonObjectAdds = com.alibaba.fastjson.JSONObject.parseObject(result);
+			String province = jsonObjectAdds.getJSONObject("result").getJSONObject("addressComponent")
+					.getString("province");// 省
+			String city = jsonObjectAdds.getJSONObject("result").getJSONObject("addressComponent").getString("city");// 市
 
+			System.out.println("province:" + province);
+			System.out.println("city:" + city);
+		}
 	}
 
 }
