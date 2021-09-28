@@ -1,16 +1,24 @@
 package com.wyj.cloudopen;
 
+import com.alibaba.fastjson.JSONObject;
+import com.wyj.cloudopen.entity.Area;
+import com.wyj.cloudopen.service.IAreaService;
 import com.wyj.cloudopen.utils.HttpClientUtil;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
+import java.util.List;
 
 @SpringBootTest
 class CloudopenApplicationTests {
+
+	@Autowired
+	private IAreaService iAreaService;
 
 	@Test
 	void contextLoads() {
@@ -68,6 +76,23 @@ class CloudopenApplicationTests {
 
 			System.out.println("province:" + province);
 			System.out.println("city:" + city);
+		}
+	}
+
+	/**
+	 * 省市拼接
+	 */
+	@Test
+	public void areatest(){
+		List<Area> areaList = iAreaService.list();
+		for(Area area:areaList){
+			JSONObject list = iAreaService.getFullNameAndFullId(area.getAreaid().toString());
+			System.out.println(list);
+//			if(s!= null && !jsonObject.isEmpty()){
+//				String fullname = jsonObject.getString("fullname");
+//				String fullid = jsonObject.getString("fullid");
+//			}
+
 		}
 	}
 
