@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootTest
@@ -85,13 +86,22 @@ class CloudopenApplicationTests {
 	@Test
 	public void areatest(){
 		List<Area> areaList = iAreaService.list();
+		List<Area> areas = new ArrayList<>();
+		int count = 0;
 		for(Area area:areaList){
-			JSONObject list = iAreaService.getFullNameAndFullId(area.getAreaid().toString());
-			System.out.println(list);
-//			if(s!= null && !jsonObject.isEmpty()){
-//				String fullname = jsonObject.getString("fullname");
-//				String fullid = jsonObject.getString("fullid");
-//			}
+			count++;
+			JSONObject jsonObject = iAreaService.getFullNameAndFullId(area.getAreaid().toString());
+			if(jsonObject!= null && !jsonObject.isEmpty()){
+				String fullname = jsonObject.getString("fname");
+				String fullid = jsonObject.getString("fid");
+				area.setFullname(fullname);
+				area.setFullid(fullid);
+				areas.add(area);
+			}
+			if(count>=100){
+				count = 0;
+				iAreaService.updateBatchById(areas);
+			}
 
 		}
 	}

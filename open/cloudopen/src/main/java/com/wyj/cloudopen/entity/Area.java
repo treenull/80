@@ -1,5 +1,7 @@
 package com.wyj.cloudopen.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+
 import java.io.Serializable;
 
 /**
@@ -14,6 +16,7 @@ public class Area implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @TableId
     private Integer areaid;
 
     private String areaname;
@@ -22,7 +25,7 @@ public class Area implements Serializable {
 
     private String fullname;
 
-    private Integer fullid;
+    private String fullid;
 
     public Integer getAreaid() {
         return areaid;
@@ -52,11 +55,11 @@ public class Area implements Serializable {
     public void setFullname(String fullname) {
         this.fullname = fullname;
     }
-    public Integer getFullid() {
+    public String getFullid() {
         return fullid;
     }
 
-    public void setFullid(Integer fullid) {
+    public void setFullid(String fullid) {
         this.fullid = fullid;
     }
 
