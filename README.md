@@ -4,9 +4,35 @@
 - [x] 支持Https
 - [x] 增加访问记录接口
 - [x] 增加java爬虫技术 获取归属地
-
 - [x] 增加swagger ，快捷调试接口
+- [x] 增加地市信息处理
 - [ ] 增加数据分析，分析界面。（apexcharts.js）
+
+
+
+## MySQL 8.0 取消对 Query Cache的支持
+
+- 经实测在8.0中，类似SQL中存在类似【**SELECT @R := 1, @L := 0**】的语句会不生效。
+
+```sql
+SELECT CAST(GROUP_CONCAT(T3.areaname) AS CHAR) AS fullname,CAST(GROUP_CONCAT(T3.areaid) AS CHAR) AS fullid FROM (
+SELECT T2.* FROM
+	( SELECT
+		@R AS _ID,
+		( SELECT @R := parentId FROM area WHERE areaid = _ID ) AS parentid,
+		@L := @L + 1 AS LVL 
+	FROM
+		( SELECT @R := 1, @L := 0 ) VARS,
+		area H 
+	WHERE
+		@R <> 0 ) T1
+INNER JOIN area T2 ON T1._ID = T2.areaid
+ORDER BY T1.LVL DESC) T3
+```
+
+- 而在 mysql 5.7 版本中是可以正常执行的
+
+
 
 ## 本地测试解决 has been blocked by CORS policy问题
 
