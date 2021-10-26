@@ -1,5 +1,6 @@
 package com.wyj.cloudopen.utils;
 
+import com.alibaba.fastjson.JSONObject;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -10,7 +11,9 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
@@ -27,6 +30,13 @@ import java.util.Map;
 public class HttpClientUtil {
 
 
+    /**
+     *
+     * @param url
+     * @param header
+     * @param param
+     * @return
+     */
     public static String doGet(String url,Map<String, String> header, Map<String, String> param) {
 
         // 创建Httpclient对象
@@ -44,7 +54,7 @@ public class HttpClientUtil {
             }
             URI uri = builder.build();
 
-            // 创建http GET请求
+            // 创建http GET请求 添加表头header参数
             HttpGet httpGet = new HttpGet(uri);
             if (header != null) {
                 for (String key : header.keySet()) {
@@ -77,7 +87,14 @@ public class HttpClientUtil {
         return doGet(url, null,null);
     }
 
-    public static String doPost(String url, Map<String, String> param) {
+    /**
+     * doPost
+     * @param url 链接
+     * @param header 请求头
+     * @param param 参数
+     * @return
+     */
+    public static String doPost(String url, Map<String, String> header, Map<String, String> param) {
         // 创建Httpclient对象
         CloseableHttpClient httpClient = HttpClients.createDefault();
         CloseableHttpResponse response = null;
@@ -85,6 +102,13 @@ public class HttpClientUtil {
         try {
             // 创建Http Post请求
             HttpPost httpPost = new HttpPost(url);
+
+            //添加表头header参数
+            if (header != null) {
+                for (String key : header.keySet()) {
+                    httpPost.addHeader(key, header.get(key));
+                }
+            }
             // 创建参数列表
             if (param != null) {
                 List<NameValuePair> paramList = new ArrayList<>();
@@ -112,11 +136,23 @@ public class HttpClientUtil {
         return resultString;
     }
 
+    /**
+     * 无参函数
+     * @param url
+     * @return
+     */
     public static String doPost(String url) {
-        return doPost(url, null);
+        return doPost(url,null,null);
     }
 
-    public static String doPostJson(String url, String json) {
+    /**
+     * json函数
+     * @param url
+     * @param header 请求头参数
+     * @param json json
+     * @return
+     */
+    public static String doPostJson(String url, Map<String, String> header, String json) {
         // 创建Httpclient对象
         CloseableHttpClient httpClient = HttpClients.createDefault();
         CloseableHttpResponse response = null;
@@ -124,6 +160,13 @@ public class HttpClientUtil {
         try {
             // 创建Http Post请求
             HttpPost httpPost = new HttpPost(url);
+
+            // 创建http POST请求 添加表头header参数
+            if (header != null) {
+                for (String key : header.keySet()) {
+                    httpPost.addHeader(key, header.get(key));
+                }
+            }
             // 创建请求内容
             StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON);
             httpPost.setEntity(entity);

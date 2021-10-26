@@ -18,6 +18,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //import com.gj.util.*;
 
@@ -143,14 +144,14 @@ class CloudopenApplicationTests {
 	}
 
 	/**
-	 * Jsoup模拟postman接口测试
+	 * Java模拟postman接口测试
 	 * @throws IOException
 	 */
 	@Test
 	public void postmantest() throws IOException, NoSuchAlgorithmException {
 		//从URL加载HTML
 		String host = "http://127.0.0.1:9182";
-		String api = "/contract/detail";
+		String api = "/v2/document/createbyurl";
 		String param = "?contractId=2860921387552997625";
 		String url = host+api+param;
 
@@ -162,12 +163,10 @@ class CloudopenApplicationTests {
 		String secret = "CtY9B9Bc5KYdGzHHxFgQ0lA1HvMmyJ";
 		/* MD5加密 */
 		//表头登录签名signature
-		//String signature = MD5.toMD5(token.trim()+secret.trim()+timestamp.trim());
+//		String signature = MD5.toMD5(token.trim()+secret.trim()+timestamp.trim());
 		String signature = md5(token.trim()+secret.trim()+timestamp.trim());
 
 		String signatures = "a241a6bc1304966281379501eb7baaa3";
-
-
 
 		//Document document = Jsoup.connect(url).get();
 		HashMap<String,String> header = new HashMap<>();
@@ -178,6 +177,7 @@ class CloudopenApplicationTests {
 		header.put("Accept", "*/*");
 		header.put("Accept-Encoding","gzip, deflate, br");
 		header.put("Connection","keep-alive");
+		header.put("Content-Type","application/json");
 
 		header.put("Postman-Token","07133faf-5ffc-4752-a68f-4532bbdb8bf8");
 
@@ -189,11 +189,18 @@ class CloudopenApplicationTests {
 		header.put("x-qys-accesstoken",token);
 		header.put("x-qys-signature",signature);
 
-		String result = HttpClientUtil.doGet(url,header,null);
+		Map<String, String> map = new HashMap<>();
+		map.put("url","https://me.treenull.cn/test.pdf");
+		map.put("title","测试");
+		map.put("fileType","pdf");
 
-		JSONObject json_test = JSONObject.parseObject(result);
+		String getresult = HttpClientUtil.doGet(url,header,null);
 
-		System.out.println(result);
+		String postResult = HttpClientUtil.doPostJson(host+api,header,JSONObject.toJSONString(map));
+
+		JSONObject json_test = JSONObject.parseObject(getresult);
+
+		System.out.println(getresult);
 
 		System.out.println(json_test);
 	}
