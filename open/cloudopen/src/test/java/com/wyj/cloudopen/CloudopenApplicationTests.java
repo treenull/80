@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -144,7 +145,7 @@ class CloudopenApplicationTests {
 	}
 
 	/**
-	 * Java模拟postman接口测试
+	 * Java模拟postman接口测试 get请求和post请求
 	 * @throws IOException
 	 */
 	@Test
@@ -163,12 +164,11 @@ class CloudopenApplicationTests {
 		String secret = "CtY9B9Bc5KYdGzHHxFgQ0lA1HvMmyJ";
 		/* MD5加密 */
 		//表头登录签名signature
-//		String signature = MD5.toMD5(token.trim()+secret.trim()+timestamp.trim());
 		String signature = md5(token.trim()+secret.trim()+timestamp.trim());
 
 		String signatures = "a241a6bc1304966281379501eb7baaa3";
 
-		//Document document = Jsoup.connect(url).get();
+		//请求头参数
 		HashMap<String,String> header = new HashMap<>();
 
 		header.put("Cache-Control","no-cache");
@@ -181,30 +181,72 @@ class CloudopenApplicationTests {
 
 		header.put("Postman-Token","07133faf-5ffc-4752-a68f-4532bbdb8bf8");
 
-//		header.put("x-qys-timestamp","1632972339172");
-//		header.put("x-qys-accesstoken","qDiEwGfFcI");
-//		header.put("x-qys-signature","8638ba58cb9176cdb84277ea9f0bccfa");
+		header.put("x-qys-timestamp",timestamp);
+		header.put("x-qys-accesstoken",token);
+		header.put("x-qys-signature",signature);
+
+		//post请求附带参数
+		Map<String, String> paramMap = new HashMap<>();
+		paramMap.put("url","https://me.treenull.cn/test.pdf");
+		paramMap.put("title","测试");
+		paramMap.put("fileType","pdf");
+
+		String getresult = HttpClientUtil.doGet(host+"/contract/detail?contractId=2867253504928149603",header,null);
+
+		String postResult = HttpClientUtil.doPostJson(host+api,header,paramMap);
+
+		System.out.println(getresult);
+
+		System.out.println(postResult);
+	}
+
+
+	/**
+	 * Java模拟postman接口测试  下载合同文档
+	 * @throws IOException
+	 */
+	@Test
+	public void postmanZipTest() throws IOException, NoSuchAlgorithmException {
+
+		//从URL加载HTML
+		String host = "http://127.0.0.1:9182";
+		//表头时间戳
+		String timestamp = String.valueOf(System.currentTimeMillis());
+		//表头登录AppToken
+		String token = "qDiEwGfFcI";
+		//表头登录AppSecret
+		String secret = "CtY9B9Bc5KYdGzHHxFgQ0lA1HvMmyJ";
+		/* MD5加密 */
+		//表头登录签名signature
+		String signature = md5(token.trim()+secret.trim()+timestamp.trim());
+
+
+		//请求头参数设置
+		HashMap<String,String> header = new HashMap<>();
+
+		header.put("Cache-Control","no-cache");
+		header.put("Host", "127.0.0.1:9182");
+		header.put("User-Agent", "PostmanRuntime/7.28.3");
+		header.put("Accept", "*/*");
+		header.put("Accept-Encoding","gzip, deflate, br");
+		header.put("Connection","keep-alive");
+		header.put("Content-Type","application/zip");
+		header.put("Postman-Token","07133faf-5ffc-4752-a68f-4532bbdb8bf8");
 
 		header.put("x-qys-timestamp",timestamp);
 		header.put("x-qys-accesstoken",token);
 		header.put("x-qys-signature",signature);
 
-		Map<String, String> map = new HashMap<>();
-		map.put("url","https://me.treenull.cn/test.pdf");
-		map.put("title","测试");
-		map.put("fileType","pdf");
 
-		String getresult = HttpClientUtil.doGet(url,header,null);
 
-		String postResult = HttpClientUtil.doPostJson(host+api,header,JSONObject.toJSONString(map));
+		//文件下载
+		HttpClientUtil.doGetFileDownload(host+"/document/download?documentId=2888983431425429508",header,null);
 
-		JSONObject json_test = JSONObject.parseObject(getresult);
+		//zip压缩包文档下载
+		HttpClientUtil.doGetFileDownload(host+"/contract/download?contractId=2881113622122946601",header,null);
 
-		System.out.println(getresult);
 
-		System.out.println(json_test);
 	}
-
 
 	public static String md5(String text) {
 		String result="";
