@@ -17,33 +17,33 @@ public class Config implements Serializable {
     /**
      * 配置属性KEY
      */
-    private String configKey;
+    private String configkey;
 
     /**
      * 配置属性VALUE
      */
-    private String configValue;
+    private String configvalue;
 
     public String getConfigKey() {
-        return configKey;
+        return configkey;
     }
 
     public void setConfigKey(String configKey) {
-        this.configKey = configKey;
+        this.configkey = configKey;
     }
     public String getConfigValue() {
-        return configValue;
+        return configvalue;
     }
 
     public void setConfigValue(String configValue) {
-        this.configValue = configValue;
+        this.configvalue = configValue;
     }
 
     @Override
     public String toString() {
         return "Config{" +
-            "configKey=" + configKey +
-            ", configValue=" + configValue +
+            "configKey=" + configkey +
+            ", configValue=" + configvalue +
         "}";
     }
 }

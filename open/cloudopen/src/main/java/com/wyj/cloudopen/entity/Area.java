@@ -21,7 +21,7 @@ public class Area implements Serializable {
 
     private String areaname;
 
-    private Integer parentId;
+    private Integer parentid;
 
     private String fullname;
 
@@ -42,11 +42,11 @@ public class Area implements Serializable {
         this.areaname = areaname;
     }
     public Integer getParentId() {
-        return parentId;
+        return parentid;
     }
 
     public void setParentId(Integer parentId) {
-        this.parentId = parentId;
+        this.parentid = parentId;
     }
     public String getFullname() {
         return fullname;
@@ -68,7 +68,7 @@ public class Area implements Serializable {
         return "Area{" +
             "areaid=" + areaid +
             ", areaname=" + areaname +
-            ", parentId=" + parentId +
+            ", parentId=" + parentid +
             ", fullname=" + fullname +
             ", fullid=" + fullid +
         "}";

@@ -17,46 +17,46 @@ public class Table_config implements Serializable {
     /**
      * KEY-对应表的字段名
      */
-    private String configKey;
+    private String configkey;
 
     /**
      * VALUE-对应的数据名
      */
-    private String configValue;
+    private String configvalue;
 
     /**
      * 对应表的名字
      */
-    private String tableName;
+    private String tablename;
 
     public String getConfigKey() {
-        return configKey;
+        return configkey;
     }
 
     public void setConfigKey(String configKey) {
-        this.configKey = configKey;
+        this.configkey = configKey;
     }
     public String getConfigValue() {
-        return configValue;
+        return configvalue;
     }
 
     public void setConfigValue(String configValue) {
-        this.configValue = configValue;
+        this.configvalue = configValue;
     }
     public String getTableName() {
-        return tableName;
+        return tablename;
     }
 
     public void setTableName(String tableName) {
-        this.tableName = tableName;
+        this.tablename = tableName;
     }
 
     @Override
     public String toString() {
         return "Table_config{" +
-            "configKey=" + configKey +
-            ", configValue=" + configValue +
-            ", tableName=" + tableName +
+            "configKey=" + configkey +
+            ", configValue=" + configvalue +
+            ", tableName=" + tablename +
         "}";
     }
 }
