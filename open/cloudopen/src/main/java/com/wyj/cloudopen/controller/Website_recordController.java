@@ -68,17 +68,12 @@ public class Website_recordController {
     //@Scheduled(cron="0 30 * * * ?")
     @ResponseBody
     @GetMapping("/pythonIp")
-    public JSONObject pythonIp(@RequestParam String count) throws IOException {
+    public JSONObject pythonIp() throws IOException {
 
         //数据库获取所有未更新的ip数据
         QueryWrapper<Website_record> recordQueryWrapper = new QueryWrapper<>();
-        // 拼接
-        String lastSql = "limit 10";
-        if(!count.isEmpty()){
-            lastSql="limit "+count;
-        }
         // "SELECT id,accessIP FROM website_record WHERE status=0000 LIMIT 1"
-        recordQueryWrapper.select("id","accessIP").eq("status",00).last(lastSql);
+        recordQueryWrapper.select("id","accessIP").eq("status","000");
         List<Website_record> websiteRecords = iWebsiteRecordService.list(recordQueryWrapper);
 
         //数据库获取配置的爬虫爬取链接

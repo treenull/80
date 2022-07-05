@@ -61,24 +61,10 @@ public class MyBatisPlusAutoGenerator {
             DataSourceConfig dsc = new DataSourceConfig();
 
             //MariaDb
-            dsc.setUrl("jdbc:mysql://121.41.90.69/cloud_open?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC");
-            dsc.setDriverName("org.mariadb.jdbc.Driver");
-            dsc.setUsername("root");
-            dsc.setPassword("kYy5HWjR26mYaEeC");
-
-            /*
-            MySQL  ssf
-            dsc.setUrl("jdbc:mysql://106.15.197.17:3306/cloud_task?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC");
+            dsc.setUrl("jdbc:mysql://127.0.0.1/cloud_open?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC");
             dsc.setDriverName("com.mysql.cj.jdbc.Driver");
             dsc.setUsername("root");
-            dsc.setPassword("1234@abcd");
-             */
-
-            //Oracle
-            // dsc.setUrl("jdbc:oracle:thin:@10.100.10.101:1521:orcl");
-            // dsc.setDriverName("oracle.jdbc.OracleDriver");
-            // dsc.setUsername("NCYY");
-            // dsc.setPassword("NCYY");
+            dsc.setPassword("123456");
 
             mpg.setDataSource(dsc);
 
