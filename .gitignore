@@ -1,0 +1,7 @@
+/open/.idea
+/open/src
+/open/cloudopen/logs
+/open/cloudopen/src/main/resources/application.yml
+/open/logs
+/open/cloudopen/src/main/resources/*.yml
+/open/cloudopen/src/test/

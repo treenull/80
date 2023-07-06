@@ -1,6 +1,7 @@
 package com.wyj.cloudopen.controller;
 
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
@@ -17,8 +18,12 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -125,6 +130,30 @@ public class Website_recordController {
         }
 
         return CommonUtil.successJson("200");
+    }
+
+    /**
+     * 解析ip地址
+     *
+     * @Param ipAddress ip地址
+     * @Return 解析后的ip地址
+     */
+    public static String getIpSource(String ipAddress) {
+        try {
+            URL url = new URL("http://opendata.baidu.com/api.php?query=" + ipAddress + "&co=&resource_id=6006&oe=utf8");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(url.openConnection().getInputStream(), "utf-8"));
+            String line = null;
+            StringBuffer result = new StringBuffer();
+            while ((line = reader.readLine()) != null) {
+                result.append(line);
+            }
+            reader.close();
+            Map map = JSON.parseObject(result.toString(), Map.class);
+            List<Map<String, String>> data = (List) map.get("data");
+            return data.get(0).get("location");
+        } catch (Exception e) {
+            return "";
+        }
     }
 
 
