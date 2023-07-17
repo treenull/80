@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="60 seconds">
+    <springProperty scope="context" name="APP_NAME" source="spring.application.name" />
+    <springProperty scope="context" name="logKeepTime" source="cloud.logKeepTime" />
     <!-- 彩色日志 -->
     <!-- 彩色日志依赖的渲染类 -->
     <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
@@ -8,11 +10,12 @@
     <!-- 彩色日志格式 -->
     <property name="CONSOLE_LOG_PATTERN" value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
 
-    <contextName>tools</contextName>
+    <contextName>cloudopen</contextName>
 
     <!--定义日志文件的存储地址 -->
     <property name="LOG_HOME" value="${LOG_PATH:-${cloud.logdir:-${java.io.tmpdir:-/tmp}}}"/>
 
+    <!--控制台的标准输出 -->
     <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
         <!--此日志appender是为开发使用，只配置最底级别，控制台输出的日志级别是大于或等于此级别的日志信息-->
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
@@ -25,16 +28,16 @@
         </encoder>
     </appender>
 
+    <!-- 按天输出日志到文件 通用 可自定义自己的-->
     <appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>DEBUG</level>
         </filter>
         <!-- 可让每天产生一个日志文件，最多 180 个，自动回滚 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_HOME}/%d{yyyy-MM,aux}/cloudopen-%d{yyyy-MM-dd}.log
-            </fileNamePattern>
+            <fileNamePattern>${LOG_HOME}/${APP_NAME}-%d{yyyy-MM-dd}.log</fileNamePattern>
             <!-- keep 30 days' worth of history capped at 50GB total size -->
-            <maxHistory>30</maxHistory>
+            <maxHistory>${logKeepTime}</maxHistory>
             <totalSizeCap>2GB</totalSizeCap>
         </rollingPolicy>
         <!-- 日志文件的格式 -->
@@ -44,6 +47,26 @@
         </encoder>
     </appender>
 
+    <!-- 按天输出日志到文件 公有云回调单独输出-->
+    <appender name="CloudRollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <!-- 可让每天产生一个日志文件，最多 180 个，自动回滚 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/QYS/CloudCallback-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- keep 30 days' worth of history capped at 50GB total size -->
+            <maxHistory>${logKeepTime}</maxHistory>
+            <totalSizeCap>1024MB</totalSizeCap>
+        </rollingPolicy>
+        <!-- 日志文件的格式 -->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level --- [%file:%line][%thread] - %msg%n</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 标准配置 -->
     <appender name="AsyncRollingFile" class="ch.qos.logback.classic.AsyncAppender">
         <appender-ref ref="RollingFile"/>
         <includeCallerData>true</includeCallerData>
@@ -61,7 +84,13 @@
     <logger name="org.apache" level="WARN"/>
 
     <!--如果需要打印SQL,可以把下面的级别设置为DEBUG -->
-    <logger name="com.wyj.cloudopen.mapper" level="DEBUG" />
+    <logger name="com.wyj.cloudopen.mapper" level="INFO" />
     <logger name="com.wyj.cloudopen" level="INFO" />
+
+    <!-- name:用来指定受此logger约束的某一个包或者具体的某一个类 -->
+    <logger name="com.wyj.cloudopen.controller.QYSCloudCallbackController" level="INFO" additivity="false">
+        <appender-ref ref="Console"/>
+        <appender-ref ref="CloudRollingFile"/>
+    </logger>
 
 </configuration>

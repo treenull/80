@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 @RequestMapping("/cloudopen/yiyan")
 @CrossOrigin
-public class YiyanController {
+public class YiyanController extends BaseController {
 
     @Autowired
     private IYiyanService iYiyanService;
@@ -36,10 +36,18 @@ public class YiyanController {
         return CommonUtil.successJson("200");
     }
 
+    /**
+     * 每条从一言接口拉取的文案入库，收集自己的文案库
+     * @param jsonObject
+     * @param response
+     * @param request
+     * @return
+     */
     @ResponseBody
     @PostMapping("/dataRecord")
     public JSONObject dataRecord(@RequestBody JSONObject jsonObject, HttpServletResponse response, HttpServletRequest request){
 
+        logger.info("requestUrl:{},start","/dataRecord");
         iYiyanService.dataRecord(jsonObject,request);
 
         return CommonUtil.successJson("200");

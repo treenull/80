@@ -11,6 +11,12 @@ mybatis-plus:
 
 
 spring:
+  profiles:
+    active: dev
+
+  application:
+    name: cloudopen
+
   datasource:
     dynamic:
       primary: mysql #设置默认的数据源或者数据源组,默认值即为master
@@ -29,10 +35,7 @@ spring:
       additional-paths: /resources/**,/java/com/wyj/cloudopen/controller/**
       enabled: true
 
-
-  config:
-    additional-location: ./application.yml
-
 #自定义配置项
 cloud:
-  logdir: ./logs
+  logKeepTime: 30
+  logdir: /logs

@@ -36,7 +36,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/cloudopen")
 @CrossOrigin
-public class Website_recordController {
+public class Website_recordController extends BaseController {
 
     @Autowired
     private IWebsite_recordService iWebsiteRecordService;
@@ -44,49 +44,74 @@ public class Website_recordController {
     private IConfigService iConfigService;
 
 
+    /**
+     * 接口服务状态检测
+     * @param response
+     * @return
+     */
     @ResponseBody
     @GetMapping("/checkHealth")
     public JSONObject checkHealth(HttpServletResponse response){
 
+        logger.info("requestUrl:{},start","/checkHealth");
         return CommonUtil.successJson("200");
     }
 
+    /**
+     * 访问记录接口
+     * @param response
+     * @param request
+     * @return
+     */
     @ResponseBody
     @GetMapping("/record")
     public JSONObject dataRecord(HttpServletResponse response, HttpServletRequest request){
 
+        logger.info("requestUrl:{},start","/record");
         iWebsiteRecordService.record(request);
 
         return CommonUtil.successJson("200");
     }
 
+    /**
+     * 访问详情记录接口，信息会更详细些
+     * @param jsonObject
+     * @param response
+     * @param request
+     * @return
+     */
     @ResponseBody
     @PostMapping("/detailedRecord")
     public JSONObject detailedRecord(@RequestBody JSONObject jsonObject, HttpServletResponse response, HttpServletRequest request){
 
+        logger.info("requestUrl:{},start","/detailedRecord");
         iWebsiteRecordService.detailedRecord(jsonObject,request);
 
         return CommonUtil.successJson("200");
     }
 
+    /**
+     * 根据详情接口记录的IP，去网站上爬取IP对应的省市信息，并入库
+     * @return
+     * @throws IOException
+     */
     //每隔30分钟执行一次
     //@Scheduled(cron="0 30 * * * ?")
     @ResponseBody
     @GetMapping("/pythonIp")
     public JSONObject pythonIp() throws IOException {
 
+        logger.info("requestUrl:{},start","/pythonIp");
         //数据库获取所有未更新的ip数据
         QueryWrapper<Website_record> recordQueryWrapper = new QueryWrapper<>();
         // "SELECT id,accessIP FROM website_record WHERE status=0000 LIMIT 1"
         recordQueryWrapper.select("id","accessIP").eq("status","000");
         List<Website_record> websiteRecords = iWebsiteRecordService.list(recordQueryWrapper);
-
         //数据库获取配置的爬虫爬取链接
         String baseUrl = iConfigService.getConfigValue("IP_PY_URL");
-
+        logger.info("获取到待更新数据共:{}条, 本次爬虫爬取链接为：{}, 开始循环爬取",websiteRecords.size(),baseUrl);
         //循环抓取
         for (Website_record websiteRecord : websiteRecords) {
-
             //拼接链接
             String url = baseUrl + websiteRecord.getAccessIP();
             Connection connect = Jsoup.connect(url);
@@ -111,12 +136,13 @@ public class Website_recordController {
                 operator = splits[2].substring(index+1);
             }catch (Exception ignored){
                 ignored.printStackTrace();
+                logger.error("抓取数据异常",ignored);
             }
             UpdateWrapper<Website_record> recordUpdateWrapper = new UpdateWrapper<>();
             // "UPDATE website_record SET accessAddr = '',accessOperator = '',status = 0000 WHERE id ="
             recordUpdateWrapper.setSql("accessAddr = '"+addr+"',accessOperator = '"+operator+"',status = 1").eq("id",websiteRecord.getId());
             iWebsiteRecordService.update(recordUpdateWrapper);
-
+            logger.info("成功入库一条数据:{}",recordUpdateWrapper.getSqlSet());
             //当前线程暂停5秒后执行，防止爬取频率过高，被Ban掉IP
             try
             {
@@ -125,10 +151,11 @@ public class Website_recordController {
             catch (InterruptedException e)
             {
                 e.printStackTrace();
+                logger.error("当前线程暂停5s失败",e);
             }
 
         }
-
+        logger.info("爬取结束");
         return CommonUtil.successJson("200");
     }
 
