@@ -19,9 +19,7 @@ import java.util.Map;
 @Controller
 @CrossOrigin
 public class QYSCloudCallbackController {
-
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
-
 	@ResponseBody
 	@RequestMapping("/QYSCloudCallbackServlet")
 	public String QYSCloudCallbackServlet(@RequestParam Map<String,String> paramMap, HttpServletResponse response, HttpServletRequest request){
