@@ -29,7 +29,7 @@ public class LogFilter extends OncePerRequestFilter implements Ordered {
 		String url = request.getRequestURI();
 
 		// 如果是公有云回调的接口，则不打印相关信息
-		if(url.contains("QYSCloudCallbackServlet")) {
+		if(url.contains("QYS")) {
 			filterChain.doFilter(httpRequest, httpResponse);
 			return;
 		}

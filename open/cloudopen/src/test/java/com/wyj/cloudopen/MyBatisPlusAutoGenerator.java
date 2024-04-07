@@ -15,6 +15,7 @@ import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,10 +62,10 @@ public class MyBatisPlusAutoGenerator {
             DataSourceConfig dsc = new DataSourceConfig();
 
             //MariaDb
-            dsc.setUrl("jdbc:mysql://127.0.0.1/cloud_open?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC");
+            dsc.setUrl("jdbc:mysql://127.0.0.1/qystools?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC");
             dsc.setDriverName("com.mysql.cj.jdbc.Driver");
             dsc.setUsername("root");
-            dsc.setPassword("123456");
+            dsc.setPassword("Admin#1234");
 
             mpg.setDataSource(dsc);
 
@@ -149,4 +150,22 @@ public class MyBatisPlusAutoGenerator {
             mpg.execute();
         }
 
+
+    @Test
+    public void test(){
+        String mediaId = "213213213213213213213";
+
+        String message = "{\n" +
+                "    \"touser\": [\n" +
+                "        \"oKHJM6zAOjDD-OMdLt3uYwRzvhzQ\"\n" +
+                "    ],\n" +
+                "    \"mpnews\": {\n" +
+                "        \"media_id\": " + "\""+mediaId+"\""+ "\n"+
+                "    },\n" +
+                "    \"msgtype\": \"mpnews\"\n" +
+                "}";
+
+
+        System.out.println(message);
+    }
 }

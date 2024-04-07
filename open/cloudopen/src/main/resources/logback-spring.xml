@@ -88,7 +88,7 @@
     <logger name="com.wyj.cloudopen" level="INFO" />
 
     <!-- name:用来指定受此logger约束的某一个包或者具体的某一个类 -->
-    <logger name="com.wyj.cloudopen.controller.QYSCloudCallbackController" level="INFO" additivity="false">
+    <logger name="com.wyj.cloudopen.controller.QYSCloudController" level="INFO" additivity="false">
         <appender-ref ref="Console"/>
         <appender-ref ref="CloudRollingFile"/>
     </logger>

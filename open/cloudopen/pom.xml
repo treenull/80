@@ -117,6 +117,23 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.9.2</version>
 		</dependency>
+		<!--httpclient-->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>4.4.13</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.12</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+			<version>4.5.12</version>
+			<scope>test</scope>
+		</dependency>
 
 		<!-- 日志打印依赖
 		<dependency>
@@ -129,6 +146,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>cloudopen</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
